@@ -18,6 +18,7 @@ const seedDB = async () => {
         const price = Math.floor(Math.random()*20) + 10;
         const cg = new Campground({
             title : `${sample(descriptors)} ${sample(places)}`,
+            author : '6215045fafe51dc9e2aa4ac8',
             location : `${cities[random].city}, ${cities[random].state}`,
             image : 'https://source.unsplash.com/collection/484351',
             description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt sit cumque id enim modi, vero harum nihil cum obcaecati ut nesciunt aut unde natus dolore placeat aspernatur voluptatem! Est, eos!',

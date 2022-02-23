@@ -58,13 +58,6 @@ app.use('/campgrounds/:id/reviews', reviewsRoutes);
 app.use('/', userRoutes);
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.get('/fakeUser', async(req,res) => {
-    const user = new User({email : "ankit@gmail.com", username : "ankit"})
-    const newUser = await User.register(user, 'Ankit122');
-    res.send(newUser);
-})
-
 app.get('/req', (req, res) => {
     res.render('home');
 })
