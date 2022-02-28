@@ -1,32 +1,37 @@
 <% layout('layouts/boilerplate') %>
+
+<div id="map" style="width: 100%; height: 500px"></div>
+
 <h1 class="mb-4">All Campgrounds</h1>
 
-<ul>
-    <% for (let campground of campgrounds) {%>
-    <div class="card mb-3">
-        <div class="row">
-            <div class="col-md-4">
-                <img
-                    src="<%= campground.images[0].url %> "
-                    alt=""
-                    class="img-fluid"
-                />
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title"><%=campground.title%></h5>
-                    <p class="card-text"><%= campground.description %></p>
-                    <p class="card-text text-muted">
-                        <%= campground.location %>
-                    </p>
-                    <a
-                        href="/campgrounds/<%= campground._id %>"
-                        class="btn btn-primary"
-                        >View <%=campground.title%></a
-                    >
-                </div>
+<% for (let campground of campgrounds) {%>
+<div class="card mb-3">
+    <div class="row">
+        <div class="col-md-4">
+            <img
+                src="<%= campground.images[0].url %> "
+                alt=""
+                class="img-fluid"
+            />
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title"><%=campground.title%></h5>
+                <p class="card-text"><%= campground.description %></p>
+                <p class="card-text text-muted"><%= campground.location %></p>
+                <a
+                    href="/campgrounds/<%= campground._id %>"
+                    class="btn btn-primary"
+                    >View <%=campground.title%></a
+                >
             </div>
         </div>
     </div>
-    <% } %>
-</ul>
+</div>
+<% } %>
+
+<script>
+    const token = "<%-process.env.MAPBOX_TOKEN%>";
+    const campgrounds = { features : <%- JSON.stringify(campgrounds) %>};
+</script>
+<script src="/scripts/clusterMap.js"></script>
