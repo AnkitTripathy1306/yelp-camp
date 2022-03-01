@@ -20,10 +20,9 @@ const reviewsRoutes = require("./routes/reviews");
 const userRoutes = require("./routes/users");
 const User = require("./models/user");
 const app = express();
-// const dbUrl = process.env.DB_URL;
 
-const dbUrl = "mongodb://localhost:27017/yelp-camp";
-
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp";
+const secret = process.env.SECRET || "WinLoseOrTieChelseaTillIDie";
 mongoose
     .connect(dbUrl, {
         useNewUrlParser: true,
@@ -33,8 +32,8 @@ mongoose
     .catch((e) => console.log("Could not connect to Mongo", e));
 
 const store = mongoStore.create({
-    mongoUrl: "mongodb://localhost:27017/yelp-camp",
-    crypto: { secret: "dontknowityet" },
+    mongoUrl: dbUrl,
+    crypto: { secret },
     touchAfter: 24 * 60 * 60,
 });
 
@@ -43,7 +42,7 @@ store.on("error", function (e) {
 });
 
 const sessionConfig = {
-    secret: "thisIsASecret",
+    secret,
     resave: false,
     saveUninitialized: true,
     store,
